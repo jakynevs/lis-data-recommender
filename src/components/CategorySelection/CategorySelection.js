@@ -6,10 +6,11 @@ import theme from '../../styles/theme';
 import NavigationButton from '../../styles/NavigationButton';
 import Dropdown from '../Dropdown/Dropdown'
 import { fetchCategories } from '../../services/api'; 
-
+import { useAppContext } from '../../Context/StateContext';
 
 function CategorySelection() {
-  const [ categories, setCategories ] = useState([])
+  const [categories, setCategories] = useState([])
+  const { setSelectedCategory } = useAppContext();
 
   useEffect(() => {
     const getCategories = async () => {
@@ -25,9 +26,10 @@ function CategorySelection() {
   }, []);
 
   const handleDropdownChange = (event) => {
-    console.log("Changed dropdown")
-  }
-  
+    const categoryId = event.target.value;
+    setSelectedCategory(categoryId);
+};
+
   let navigate = useNavigate();
 
   const goToNextStep = () => {
@@ -47,7 +49,6 @@ function CategorySelection() {
           <NavigationButton onClick={goToNextStep}>Next</NavigationButton>
         </div>
     </ThemeProvider>
-
   );
 }
 

@@ -1,20 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../../styles/GlobalStyle';
 import theme from '../../styles/theme';
 import NavigationButton from '../../styles/NavigationButton';
 import Dropdown from '../Dropdown/Dropdown'
+import { useAppContext } from '../../Context/StateContext';
+import { fetchColours } from '../../services/api';
 
 function ColourSelection() {
-  const options = [
-    { label: 'Option 1', value: '1' },
-    { label: 'Option 2', value: '2' },
-    { label: 'Option 3', value: '3' },
-  ];
+  const [colours, setColours] = useState([])
+  const { setSelectedColour } = useAppContext()
+  const { selectedSubCategory } = useAppContext()
+
+  useEffect(() => {
+    if(selectedSubCategory) {
+      const getColours = async () => {
+        try {
+          const data = await fetchColours(selectedSubCategory)
+          setColours(data);
+        } catch (error) {
+          console.log(error)
+        }
+      };
+      getColours();
+    }
+  }, [])
+
   const handleDropdownChange = (event) => {
-    console.log("Changed dropdown")
-  }
+    const colourId = event.target.value;
+    setSelectedColour(colourId)
+    }
 
   let navigate = useNavigate();
 
@@ -31,9 +47,12 @@ function ColourSelection() {
       <GlobalStyle />
         <div>
           <h1>Select a Colour</h1>
-          <Dropdown options={options} defaultValue="" onChange={handleDropdownChange} />
-          <NavigationButton onClick={goToPreviousStep}>Back</NavigationButton>
-          <NavigationButton onClick={goToNextStep}>Next</NavigationButton>    
+            <Dropdown 
+              options={colours.map(col => ({ value: col.id, label: col.name }))} 
+              defaultValue={""} 
+              onChange={handleDropdownChange} />          
+              <NavigationButton onClick={goToPreviousStep}>Back</NavigationButton>
+              <NavigationButton onClick={goToNextStep}>Next</NavigationButton>    
           </div>
       </ThemeProvider>
   );
