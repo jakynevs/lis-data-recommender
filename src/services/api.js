@@ -41,4 +41,16 @@ export const fetchColours = async (id_subcategory) => {
     }
   };
 
+  export const fetchProducts = async (id_category, id_subcategory, id_colour) => {
+    try {
+        console.log("Fetching products...")
+        const id_color = parseInt(id_colour)
+        const response = await api.get(`/api/v1/recommender/product?id_category=${id_category}&id_subcategory=${id_subcategory}&id_color=${id_color}`);
+        return response.data;
+    } catch (error) {
+        console.error('There was an error fetching the products:', error);
+        throw error;
+    }
+  };
+
   
