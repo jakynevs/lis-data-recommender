@@ -1,102 +1,104 @@
 # LIS Data Recommender
 
-## Project Overview
+## Visión General del Proyecto
 
-The LIS-DATA Recommender is a React-based frontend application designed to recommend products to users based on their selections across various categories, subcategories, and colors. This application consumes a predefined API to fetch data and provides an intuitive step-by-step selection process culminating in a product list that can be filtered and sorted.
+El Recomendador de Datos LIS es una aplicación frontend basada en React diseñada para recomendar productos a usuarios según sus selecciones en varias categorías, subcategorías y colores. Esta aplicación consume una API predefinida para obtener datos y ofrece un proceso de selección intuitivo paso a paso, que culmina en una lista de productos que pueden ser filtrados y ordenados.
 
-## Features
+## Características
 
-- Step-by-step product recommendations
-- Dynamic filtering based on user preferences
-- Sorting of products by rating, price, free delivery and availability
-- Responsive design for a seamless experience across devices
+- Recomendaciones de productos paso a paso
+- Filtrado dinámico basado en preferencias de usuario
+- Ordenación de productos por calificación, precio, entrega gratuita y disponibilidad
+- Diseño responsivo para una experiencia sin fisuras en dispositivos
 
-## Getting Started
+## Cómo Empezar
 
-To get a local copy up and running, follow these simple steps.
+Para obtener una copia local en funcionamiento, sigue estos simples pasos.
 
-### Prerequisites
+### Prerrequisitos
 
-- Node.js installed on your local machine
-- NPM or Yarn to manage packages
+- Node.js instalado en tu máquina local
+- NPM o Yarn para manejar paquetes
 
-### Installation
+### Instalación
 
-1. **Clone the repository**
+1. **Clonar el repositorio**
    ```sh
    git clone https://github.com/jakynevs/lis-data-recommender
     ```
 
-2. **Navigate to Project Directory**
+2. **Navegar al Directorio del Proyecto**
     ```
     cd LIS-DATA-RECOMMENDER
     ```
 
-3. **Install NPM packages**
+3. **Instalar los paquetes de NPM**
     ```
     npm install
     ```
 
-4. **Create a .env file in the root directory and add the API key**
+4. **Crear un archivo .env en el directorio raíz y agregar la clave API**
     ```
     REACT_APP_API_KEY=your_api_key_here
     ```
 
-## Running the Application
-Start the development server:
+
+## Ejecutar la Aplicación
+
+Iniciar el servidor de desarrollo:
+
 ```
     npm start
 ```
-The application will open in your default web browser at http://localhost:3000.
+La aplicación se abrirá en tu navegador web predeterminado en http://localhost:3000.
 
-## Usage
-Navigate through the application's steps to select categories, subcategories, and colors. The final step displays a list of products tailored to your selections, which you can further filter and sort.
+## Uso
 
-## Project Completion Status
+Navega a través de los pasos de la aplicación para seleccionar categorías, subcategorías y colores. El último paso muestra una lista de productos adaptados a tus selecciones, que puedes filtrar y ordenar adicionalmente.
 
-This project successfully meets all the functional and non-functional requirements as outlined, with the exception of unit testing and the option to change language. While the development of some form of testing on the frontend and language localization would enhance the application's robustness and user experience, these features were considered optional and have not been implemented at this stage.
+## Estado de Finalización del Proyecto
 
-### Implemented Features
+Este proyecto cumple con éxito todos los requisitos funcionales y no funcionales planteados, con la excepción de las pruebas unitarias y la opción de cambiar el idioma. Aunque el desarrollo de alguna forma de pruebas en el frontend y la localización de idiomas mejoraría la robustez de la aplicación y la experiencia del usuario, estas características se consideraron opcionales y no se han implementado en esta etapa.
 
-- A multi-step product recommendation system based on categories, subcategories, and colors.
-- A dynamic product listing with filters for price and free shipping options.
-- Product sorting capabilities by rating and price (ascending and descending).
+### Características Implementadas
 
-### Future Considerations
+- Un sistema de recomendación de productos en múltiples pasos basado en categorías, subcategorías y colores.
+- Una lista dinámica de productos con filtros para precio y opciones de envío gratuito.
+- Capacidades de ordenación de productos por calificación y precio (ascendente y descendente).
 
-The following optional functionalities may be considered for future development cycles:
+### Consideraciones Futuras
 
-- Adding unit tests to ensure the reliability and stability of the frontend application.
-- Implementing internationalization to allow changing the language on the website.
+Las siguientes funcionalidades opcionales pueden considerarse para ciclos de desarrollo futuros:
 
-The decision to forgo these optional features was made to align with the project's initial scope and timeline. Efforts were focused on ensuring a fully functional, well-designed, and user-friendly interface that adheres to the provided API specifications and established best practices in frontend development.
+- Agregar pruebas unitarias para asegurar la fiabilidad y estabilidad de la aplicación frontend.
+- Implementar la internacionalización para permitir cambiar el idioma en el sitio web.
+
+La decisión de omitir estas características opcionales se tomó para alinearse con el alcance inicial del proyecto y el cronograma. Los esfuerzos se centraron en asegurar una interfaz completamente funcional, bien diseñada y amigable para el usuario que se adhiere a las especificaciones de la API proporcionada y las mejores prácticas establecidas en el desarrollo frontend.
 
 ---
 
-# License Compliance Efforts
+# Esfuerzos de Cumplimiento de Licencias
 
-## Background
+## Antecedentes
 
-In my commitment to maintaining an open-source project that strictly adheres to open-source licensing standards, I encountered a licensing issue with one of our indirect dependencies, `fs-monkey`, which was included in the project through `react-scripts` and its dependencies. 
+En mi compromiso por mantener un proyecto de código abierto que se adhiere estrictamente a los estándares de licenciamiento de código abierto, me encontré con un problema de licencia con una de nuestras dependencias indirectas, `fs-monkey`, que se incluyó en el proyecto a través de `react-scripts` y sus dependencias.
 
-## Steps Taken for Compliance
+## Pasos Tomados para el Cumplimiento
 
-### 1. Dependency Audit
+### 1. Auditoría de Dependencias
 
-Conducted an audit of the project's dependencies using `license-checker` to identify any potential licensing issues. This audit revealed that `fs-monkey`, an indirect dependency, was marked as "UNLICENSED".
+Realicé una auditoría de las dependencias del proyecto usando `license-checker` para identificar posibles problemas de licenciamiento. Esta auditoría reveló que `fs-monkey`, una dependencia indirecta, estaba marcada como "UNLICENSED".
 
-### 2. Research and Analysis
+### 2. Investigación y Análisis
 
-Upon discovering the licensing issue with `fs-monkey`:
-- Reviewed the usage of `fs-monkey` within the project to understand its role and importance.
-- Conducted research to verify the license status of `fs-monkey`, finding that it was indeed unlicensed, which could potentially conflict with the project's open-source nature.
+Al descubrir el problema de licencia con `fs-monkey`:
+- Revisé el uso de `fs-monkey` dentro del proyecto para entender su rol e importancia.
+- Realicé investigaciones para verificar el estado de la licencia de `fs-monkey`, encontrando que efectivamente no tenía licencia, lo cual podría potencialmente entrar en conflicto con la naturaleza de código abierto del proyecto.
 
-### 3. Updating Dependencies
+### 3. Actualización de Dependencias
 
-Regularly updated the dependencies to the latest versions by running `npm update`, in hopes that newer versions of `react-scripts` or its dependencies would resolve the licensing issue by removing or replacing `fs-monkey`.
+Actualicé regularmente las dependencias a las últimas versiones ejecutando `npm update`, con la esperanza de que las nuevas versiones de `react-scripts` o sus dependencias resolvieran el problema de licencia eliminando o reemplazando `fs-monkey`.
 
-### 4. Documentation and Transparency
+### 4. Documentación y Transparencia
 
-I have documented my efforts and findings regarding this licensing issue in our project's README to maintain transparency, highlighting the importance of open-source license compliance in the project.
-
-
+He documentado mis esfuerzos y hallazgos respecto a este problema de licencia en el README de nuestro proyecto para mantener la transparencia, destacando la importancia del cumplimiento de licencias de código abierto en el proyecto.
