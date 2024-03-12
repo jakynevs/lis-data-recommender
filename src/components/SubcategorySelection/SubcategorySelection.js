@@ -18,16 +18,18 @@ function SubCategorySelection() {
   const { selectedCategory } = useAppContext();
 
   useEffect(() => {
-    const getSubCategories = async () => {
-      try {
-        const data = await fetchSubCategories(selectedCategory);
-        setSubCategories(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getSubCategories(); 
-  }, [])
+    if(selectedCategory) {
+      const getSubCategories = async () => {
+        try {
+          const data = await fetchSubCategories(selectedCategory);
+          setSubCategories(data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      getSubCategories(); 
+    }
+  }, [selectedCategory])
 
   const handleDropdownChange = (event) => {
     const subCategoryId = event.target.value;

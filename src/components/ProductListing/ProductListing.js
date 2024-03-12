@@ -35,7 +35,7 @@ function ProductListing() {
       }
       getProducts()
     }
-  }, [])
+  }, [selectedCategory, selectedSubCategory, selectedColour, mostExpensiveProduct])
   
   useEffect(() => {
     let result = products; 
@@ -68,6 +68,8 @@ function ProductListing() {
         break;
       case 'price_desc':
         result.sort((a, b) => b.price - a.price);
+        break;
+      default:
         break;
     }
   

@@ -23,12 +23,12 @@ function ColourSelection() {
           const data = await fetchColours(selectedSubCategory)
           setColours(data);
         } catch (error) {
-          console.log(error)
+          console.error(error)
         }
       };
       getColours();
     }
-  }, [])
+  }, [selectedSubCategory])
 
   const handleDropdownChange = (event) => {
     const colourId = event.target.value;
