@@ -30,7 +30,6 @@ function CategorySelection() {
     getCategories();
   }, []);
 
-  
   const handleDropdownChange = (event) => {
     const categoryId = event.target.value;
     setSelectedCategory(categoryId);
@@ -55,7 +54,6 @@ function CategorySelection() {
               {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
               <Dropdown
                 options={categories.map(cat => ({ value: cat.id, label: cat.name }))}
-                defaultValue={"Select"}
                 onChange={handleDropdownChange} 
                 disabled={!categories.length || error} // Disable dropdown if there's an error or no categories
                 />

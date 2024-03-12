@@ -6,9 +6,9 @@ const renderStars = (rating, onStarClick = null) => {
     return Array.from({ length: 5 }, (_, i) => (
         <Star
           key={i}
-          active={i < rating}
+          $active={i < rating}
           onClick={() => isClickable ? onStarClick(i + 1) : null}
-          cursorStyle={isClickable ? 'pointer' : 'default'} // Pass cursor style as a prop
+          $cursorStyle={isClickable ? 'pointer' : 'default'} // Pass cursor style as a prop
         >
           {i < rating ? '★' : '☆'}
         </Star>
