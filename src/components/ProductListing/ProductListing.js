@@ -173,12 +173,12 @@ function ProductListing() {
               {filteredProducts.map(product => (
                 <ProductTile key={product.id}>
                 <h2>{product.name}</h2>
-                  <p><strong>Price: </strong>${product.price}</p>
-                  <p><strong>Free Shipping:</strong> {product.is_free_shipping ? 'Yes' : 'No'}</p>
-                  <p><strong>Average Rating:</strong> 
+                  <div><strong>Price: </strong>${product.price}</div>
+                  <div><strong>Free Shipping:</strong> {product.is_free_shipping ? 'Yes' : 'No'}</div>
+                  <div><strong>Average Rating:</strong> 
                   <StarsRating rating={Math.round(product.average_rating)} />
-                  </p>
-                  <p><strong>Stock:</strong> {product.stock_quantity}</p>
+                  </div>
+                  <div><strong>Stock:</strong> {product.stock_quantity}</div>
               </ProductTile>
           ))}
             </ProductsGrid>
