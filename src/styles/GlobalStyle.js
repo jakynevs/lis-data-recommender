@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Arial', sans-serif;
-    background-color: ${({ theme }) => theme.body};
+    background-color: ${({ theme }) => theme.primary};
     color: ${({ theme }) => theme.text};
     line-height: 1.6;
   }

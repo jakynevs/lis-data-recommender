@@ -2,21 +2,26 @@ import styled from 'styled-components';
 
 export const DropdownContainer = styled.div`
   padding: 10px;
-  margin: 0 auto;
-  width: fit-content; /* Adjust based on your layout */
+  margin: 40px auto;
+  width: fit-content;
 `;
 
 export const Select = styled.select`
-  padding: 10px 15px;
+  height: 50px;
+  width: 500px;  
   border-radius: 5px;
-  border: 1px solid #ccc;
-  background-color: pink;
+  border: 3px solid #ccc;
+  background-color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.text};
+  text-align: center;
   cursor: pointer;
+  border-radius: 12px;
+  font-size: 20px;
   &:hover {
-    border-color: #888;
+    border-color: ${({ theme }) => theme.primaryHover};;
   }
   &:focus {
     outline: none;
-    border-color: #007bff; /* Bootstrap primary color for reference */
+    border-color: #007bff; 
   }
 `;

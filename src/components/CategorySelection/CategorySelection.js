@@ -7,6 +7,9 @@ import NavigationButton from '../../styles/NavigationButton';
 import Dropdown from '../Dropdown/Dropdown'
 import { fetchCategories } from '../../services/api'; 
 import { useAppContext } from '../../Context/StateContext';
+import PageContainer from '../../styles/PageContainer'
+import ContentWrapper from '../../styles/ContentWrapper';
+import TitleContainer from '../../styles/TitleContainer';
 
 function CategorySelection() {
   const [categories, setCategories] = useState([])
@@ -40,14 +43,19 @@ function CategorySelection() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-        <div>
-          <h1>Select a Category</h1>
-          <Dropdown 
-          options={categories.map(cat => ({ value: cat.id, label: cat.name }))}
-          defaultValue="" 
-          onChange={handleDropdownChange} />
-          <NavigationButton onClick={goToNextStep}>Next</NavigationButton>
-        </div>
+        <PageContainer>
+            <ContentWrapper>
+              <TitleContainer>
+                <h1>Select a Category</h1>
+              </TitleContainer>
+              <Dropdown
+                options={categories.map(cat => ({ value: cat.id, label: cat.name }))}
+                defaultValue=""
+                onChange={handleDropdownChange} />
+              <NavigationButton>Previous</NavigationButton>
+              <NavigationButton onClick={goToNextStep}>Next</NavigationButton>
+            </ContentWrapper>
+        </PageContainer>
     </ThemeProvider>
   );
 }

@@ -7,6 +7,9 @@ import NavigationButton from '../../styles/NavigationButton';
 import Dropdown from '../Dropdown/Dropdown';
 import { useAppContext } from '../../Context/StateContext';
 import { fetchSubCategories } from '../../services/api';
+import PageContainer from '../../styles/PageContainer';
+import ContentWrapper from '../../styles/ContentWrapper';
+import TitleContainer from '../../styles/TitleContainer';
 
 
 function SubCategorySelection() {
@@ -15,7 +18,6 @@ function SubCategorySelection() {
   const { selectedCategory } = useAppContext();
 
   useEffect(() => {
-    if (selectedCategory) {
     const getSubCategories = async () => {
       try {
         const data = await fetchSubCategories(selectedCategory);
@@ -25,7 +27,6 @@ function SubCategorySelection() {
       }
     };
     getSubCategories(); 
-  }
   }, [])
 
   const handleDropdownChange = (event) => {
@@ -46,15 +47,19 @@ function SubCategorySelection() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-        <div>
-          <h1>Select a Subcategory</h1>
-            <Dropdown 
-            options={subCategories.map(subCat => ({ value: subCat.id, label: subCat.name }))} 
-            defaultValue={""} 
-            onChange={handleDropdownChange} />
-            <NavigationButton onClick={goToPreviousStep}>Back</NavigationButton>
-            <NavigationButton onClick={goToNextStep}>Next</NavigationButton>
-      </div>
+        <PageContainer>
+          <ContentWrapper>
+            <TitleContainer>
+              <h1>Select a Subcategory</h1>
+            </TitleContainer>
+              <Dropdown
+                options={subCategories.map(subCat => ({ value: subCat.id, label: subCat.name }))}
+                defaultValue={""}
+                onChange={handleDropdownChange} />
+              <NavigationButton onClick={goToPreviousStep}>Back</NavigationButton>
+              <NavigationButton onClick={goToNextStep}>Next</NavigationButton>
+          </ContentWrapper>
+      </PageContainer>
       </ThemeProvider>
   );
 }

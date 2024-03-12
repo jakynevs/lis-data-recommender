@@ -7,6 +7,9 @@ import NavigationButton from '../../styles/NavigationButton';
 import Dropdown from '../Dropdown/Dropdown'
 import { useAppContext } from '../../Context/StateContext';
 import { fetchColours } from '../../services/api';
+import PageContainer from '../../styles/PageContainer'
+import ContentWrapper from '../../styles/ContentWrapper';
+import TitleContainer from '../../styles/TitleContainer';
 
 function ColourSelection() {
   const [colours, setColours] = useState([])
@@ -45,15 +48,20 @@ function ColourSelection() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-        <div>
+      <PageContainer>
+            <ContentWrapper>
+              <TitleContainer>
           <h1>Select a Colour</h1>
+          </TitleContainer>
+
             <Dropdown 
               options={colours.map(col => ({ value: col.id, label: col.name }))} 
               defaultValue={""} 
               onChange={handleDropdownChange} />          
               <NavigationButton onClick={goToPreviousStep}>Back</NavigationButton>
               <NavigationButton onClick={goToNextStep}>Next</NavigationButton>    
-          </div>
+              </ContentWrapper>
+        </PageContainer>
       </ThemeProvider>
   );
 }

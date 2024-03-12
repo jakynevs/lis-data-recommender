@@ -1,8 +1,8 @@
 const theme = {
-    primary: '#007bff', // Primary color for app
-    primaryHover: '#0056b3', // Darker shade for hover states
-    body: '#fff', // Background color for body
-    text: '#333', // Default text color
+    primary: '#222831', // Primary color for app
+    primaryHover: '#00ADB5', // Darker shade for hover states
+    body: '#393E46', // Background color for body
+    text: '#EEEEEE', // Default text color
   };
   
   export default theme;
