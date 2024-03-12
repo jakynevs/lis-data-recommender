@@ -6,6 +6,7 @@ import theme from '../../styles/theme';
 import NavigationButton from '../../styles/NavigationButton';
 import { useAppContext } from '../../Context/StateContext';
 import { fetchProducts } from '../../services/api';
+import { ProductsGrid, ProductTile } from '../../styles/ProductGrid';
 
 
 function ProductListing() {
@@ -122,17 +123,17 @@ function ProductListing() {
             <option value="price_asc">Price Ascending</option>
             <option value="price_desc">Price Descending</option>
           </select>
-            <ul>
+          <ProductsGrid>
               {filteredProducts.map(product => (
-              <li key={product.id}>
+                <ProductTile key={product.id}>
                 <h2>{product.name}</h2>
                   <p>Price: ${product.price}</p>
                   <p>Free Shipping: {product.is_free_shipping ? 'Yes' : 'No'}</p>
                   <p>Average Rating: {product.average_rating}</p>
                   <p>Stock: {product.stock_quantity}</p>
-              </li>
+              </ProductTile>
           ))}
-            </ul>
+            </ProductsGrid>
           <NavigationButton onClick={goToPreviousStep}>Back</NavigationButton>
         </div>
     </ThemeProvider>
