@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
+import TitleContainer from '../../styles/TitleContainer';
+import StarsRating from '../RenderStars/RenderStars';
 import GlobalStyle from '../../styles/GlobalStyle';
 import theme from '../../styles/theme';
 import NavigationButton from '../../styles/NavigationButton';
+import { useNavigate } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 import { useAppContext } from '../../Context/StateContext';
 import { fetchProducts } from '../../services/api';
-import { ProductsGrid, ProductTile } from '../../styles/ProductGrid';
-import TitleContainer from '../../styles/TitleContainer';
-import { Filter, FilterLabel, FiltersContainer, FilterGroup, Column, PriceDisplay } from '../../styles/FilterStyles';
-import StarsRating from '../RenderStars/RenderStars';
+import { Filter, FilterLabel, FiltersContainer, FilterGroup, Column, PriceDisplay, ProductsGrid, ProductTile } from './ProductListingStyles';
 
 function ProductListing() {
   const [products, setProducts] = useState([])
