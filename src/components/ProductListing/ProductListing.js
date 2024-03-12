@@ -169,7 +169,9 @@ function ProductListing() {
                 <h2>{product.name}</h2>
                   <p>Price: ${product.price}</p>
                   <p>Free Shipping: {product.is_free_shipping ? 'Yes' : 'No'}</p>
-                  <p>Average Rating: {product.average_rating}</p>
+                  <p>Average Rating: 
+                  <StarsRating rating={Math.round(product.average_rating)} />
+                  </p>
                   <p>Stock: {product.stock_quantity}</p>
               </ProductTile>
           ))}
