@@ -20,15 +20,22 @@ function ProductListing() {
   const [maxPrice, setMaxPrice] = useState(2000);
   const [stockFilter, setStockFilter] = useState(false); 
   const [sortOption, setSortOption] = useState('rating_desc'); 
+  const [error, setError] = useState(null); // State for managing fetch errors
+  const [isLoading, setIsLoading] = useState(false); // State for managing loading state
 
   useEffect(() => {
     if (selectedCategory && selectedSubCategory && selectedColour) {
+      setIsLoading(true); // Start loading
       const getProducts = async () => {
         try {
           const data = await fetchProducts(selectedCategory, selectedSubCategory, selectedColour);
           setProducts(data);
+          setError(null); // Clear error on successful fetch
         } catch (error) {
-          console.log(error)
+          console.error(error)
+          setError('Failed to load products. Please try again.'); // Set error message on failure
+        } finally {
+          setIsLoading(false) // End loading 
         }
       }
       getProducts()
@@ -161,8 +168,11 @@ function ProductListing() {
             </FilterGroup>
           </Column>
         </FiltersContainer>
-
-          <ProductsGrid>
+        {error && <div style={{ color: 'red' }}>{error}</div>} 
+        {isLoading ? (
+          <div>Loading products...</div> 
+          ) : ( 
+            <ProductsGrid>
               {filteredProducts.map(product => (
                 <ProductTile key={product.id}>
                 <h2>{product.name}</h2>
@@ -175,6 +185,7 @@ function ProductListing() {
               </ProductTile>
           ))}
             </ProductsGrid>
+        )}
           <NavigationButton onClick={goToPreviousStep}>Back</NavigationButton>
     </ThemeProvider>
   );
