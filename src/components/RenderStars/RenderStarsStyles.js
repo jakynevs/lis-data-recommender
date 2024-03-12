@@ -6,6 +6,10 @@ export const StarsDisplay = styled.div`
 
 export const Star = styled.span`
   color: ${({ active, theme }) => active ? theme.primaryHover : theme.text};
-  cursor: ${({ cursorStyle }) => cursorStyle}
+  cursor: ${({ cursorStyle }) => cursorStyle};
+  
+  &:hover {
+    color: ${({ theme, cursorStyle }) => cursorStyle === 'pointer' ? theme.primaryHover : theme.text};
+  }
 `;
 
