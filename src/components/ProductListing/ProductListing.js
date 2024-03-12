@@ -7,20 +7,19 @@ import NavigationButton from '../../styles/NavigationButton';
 import { useAppContext } from '../../Context/StateContext';
 import { fetchProducts } from '../../services/api';
 import { ProductsGrid, ProductTile } from '../../styles/ProductGrid';
-
+import TitleContainer from '../../styles/TitleContainer';
+import { Filter, FilterLabel, FiltersContainer, FilterGroup, Column } from '../../styles/FilterStyles';
 
 function ProductListing() {
   const [products, setProducts] = useState([])
   const {selectedCategory, selectedSubCategory, selectedColour} = useAppContext()
-
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [freeShipping, setFreeShipping] = useState(false);
   const [minRating, setMinRating] = useState(0);
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(2000);
   const [stockFilter, setStockFilter] = useState(false); 
   const [sortOption, setSortOption] = useState('rating_desc'); 
-  const [mostExpensiveProduct, setMostExpensiveProduct] = useState(0)
 
   useEffect(() => {
     if (selectedCategory && selectedSubCategory && selectedColour) {
@@ -28,15 +27,13 @@ function ProductListing() {
         try {
           const data = await fetchProducts(selectedCategory, selectedSubCategory, selectedColour);
           setProducts(data);
-          setMostExpensiveProduct(Math.max(...data.map(product => product.price)));
-          setMaxPrice(mostExpensiveProduct)
         } catch (error) {
           console.log(error)
         }
       }
       getProducts()
     }
-  }, [selectedCategory, selectedSubCategory, selectedColour, mostExpensiveProduct])
+  }, [selectedCategory, selectedSubCategory, selectedColour])
   
   useEffect(() => {
     let result = products; 
@@ -81,14 +78,20 @@ function ProductListing() {
   const handleMinPriceChange = (e) => {
     const newValue = Number(e.target.value);
     // Ensure minPrice does not exceed current maxPrice
-    setMinPrice(newValue > maxPrice ? maxPrice : newValue);
+    setMinPrice(newValue);
+    if (newValue >= maxPrice) {
+      setMaxPrice(newValue)
+    }
   };
 
   // Handle changes in maxPrice
   const handleMaxPriceChange = (e) => {
     const newValue = Number(e.target.value);
     // Ensure maxPrice is not less than current minPrice
-    setMaxPrice(newValue < minPrice ? minPrice : newValue);
+    setMaxPrice(newValue);
+    if (newValue <= minPrice) {
+      setMinPrice(newValue)
+    }
   };
 
   let navigate = useNavigate();
@@ -99,30 +102,59 @@ function ProductListing() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-        <div>
+        <TitleContainer>
           <h1>Recommended Products</h1>
-          <div>
-            Minimum Price: <input type="range" min="0" max={maxPrice} value={minPrice} onChange={handleMinPriceChange} />
-            {minPrice}
-          </div>
-          <div>
-            Maximum Price: <input type="range" min={minPrice} max={mostExpensiveProduct} value={maxPrice} onChange={handleMaxPriceChange} />
-            {maxPrice}
-          </div>
-          <div>
-            Minimum Rating
-              <input type="range" min="1" max="5" value={minRating} onChange={e => setMinRating(Number(e.target.value))} /> 
-          </div>
-          Free Shipping
-          <input type="checkbox" checked={freeShipping} onChange={e => setFreeShipping(e.target.checked)} /> 
-          In Stock Only
-          <input type="checkbox" checked={stockFilter} onChange={e => setStockFilter(e.target.checked)} /> 
-    <      select value={sortOption} onChange={e => setSortOption(e.target.value)}>
-            <option value="rating_asc">Rating Ascending</option>
-            <option value="rating_desc">Rating Descending</option>
-            <option value="price_asc">Price Ascending</option>
-            <option value="price_desc">Price Descending</option>
-          </select>
+        </TitleContainer>
+        <FiltersContainer>
+          <Column>
+              <FilterGroup>
+                <FilterLabel>Minimum Price:</FilterLabel>
+                <Filter>
+                  <input type="range" min="0" max="2000" value={minPrice} onChange={handleMinPriceChange} />  ${Math.round(maxPrice)}
+                </Filter>
+              </FilterGroup>
+                <FilterGroup>
+                  <FilterLabel>Maximum Price:</FilterLabel>
+                  <Filter>
+                  <input type="range" min="0" max="2000" value={maxPrice} onChange={handleMaxPriceChange} />  ${Math.round(minPrice)}
+                  </Filter>
+                </FilterGroup>
+          </Column>
+          <Column>
+            <FilterGroup>
+              <FilterLabel>Rating:</FilterLabel>
+              <Filter>
+                <input type="range" min="1" max="5" value={minRating} onChange={e => setMinRating(Number(e.target.value))} /> 
+              </Filter>
+            </FilterGroup>
+            <FilterGroup>
+              <FilterLabel>Sort:</FilterLabel>
+              <Filter>
+                <select value={sortOption} onChange={e => setSortOption(e.target.value)}>
+                  <option value="rating_asc">Rating Ascending</option>
+                  <option value="rating_desc">Rating Descending</option>
+                  <option value="price_asc">Price Ascending</option>
+                  <option value="price_desc">Price Descending</option>
+                </select>
+              </Filter>
+            </FilterGroup>
+          </Column>
+          <Column>
+            <FilterGroup>
+              <FilterLabel>Free Shipping</FilterLabel>
+              <Filter>
+                <input type="checkbox" checked={freeShipping} onChange={e => setFreeShipping(e.target.checked)} />
+              </Filter>
+            </FilterGroup>
+            <FilterGroup>
+              <FilterLabel>In Stock Only</FilterLabel>
+              <Filter>
+                <input type="checkbox" checked={stockFilter} onChange={e => setStockFilter(e.target.checked)} />
+              </Filter>
+            </FilterGroup>
+          </Column>
+        </FiltersContainer>
+
           <ProductsGrid>
               {filteredProducts.map(product => (
                 <ProductTile key={product.id}>
@@ -135,7 +167,6 @@ function ProductListing() {
           ))}
             </ProductsGrid>
           <NavigationButton onClick={goToPreviousStep}>Back</NavigationButton>
-        </div>
     </ThemeProvider>
   );
 }
