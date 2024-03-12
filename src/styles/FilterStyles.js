@@ -12,6 +12,7 @@ export const FiltersContainer = styled.div`
 export const FilterLabel = styled.label`
 margin-left: 75px;
 margin-right: 10px;
+font-weight: bold;
 flex-shrink: 0; // Prevent the label from shrinking`;
 
 export const Filter = styled.div`
