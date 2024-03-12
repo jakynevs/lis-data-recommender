@@ -50,9 +50,8 @@ function CategorySelection() {
               </TitleContainer>
               <Dropdown
                 options={categories.map(cat => ({ value: cat.id, label: cat.name }))}
-                defaultValue=""
+                defaultValue={"Select"}
                 onChange={handleDropdownChange} />
-              <NavigationButton>Previous</NavigationButton>
               <NavigationButton onClick={goToNextStep}>Next</NavigationButton>
             </ContentWrapper>
         </PageContainer>
