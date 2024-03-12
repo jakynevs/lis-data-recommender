@@ -21,7 +21,7 @@ export const ProductTile = styled.div`
     text-align: center;
   }
   p {
-    padding: 0 30px; // Adds padding on both sides of the paragraph
-    text-align: left; // Ensures text within the paragraph is left-aligned
+    padding: 0 30px; 
+    text-align: left;
   }
 `;
