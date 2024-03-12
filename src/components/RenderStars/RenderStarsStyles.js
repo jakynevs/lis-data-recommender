@@ -10,7 +10,7 @@ export const Star = styled.span`
   cursor: ${({ $cursorStyle }) => $cursorStyle};
   
   &:hover {
-    color: ${({ theme, cursorStyle }) => cursorStyle === 'pointer' ? theme.primaryHover : theme.text};
+    color: ${({ theme, $cursorStyle }) => $cursorStyle === 'pointer' ? theme.primaryHover : theme.text};
   }
 `;
 
