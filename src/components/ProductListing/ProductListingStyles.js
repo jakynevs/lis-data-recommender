@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const FiltersContainer = styled.div`
   display: flex;
@@ -10,16 +10,17 @@ export const FiltersContainer = styled.div`
 `;
 
 export const FilterLabel = styled.label`
-margin-left: 75px;
-margin-right: 10px;
-font-weight: bold;
-flex-shrink: 0; // Prevent the label from shrinking`;
+  margin-left: 75px;
+  margin-right: 10px;
+  font-weight: bold;
+  flex-shrink: 0; // Prevent the label from shrinking
+`;
 
 export const Filter = styled.div`
-display: flex;
-justify-content: flex-end; // Align filter elements to the end (right)
-flex-grow: 1; // Allow the filter to grow and take available space
-margin-right: 75px;
+  display: flex;
+  justify-content: flex-end; // Align filter elements to the end (right)
+  flex-grow: 1; // Allow the filter to grow and take available space
+  margin-right: 75px;
 `;
 
 export const FilterGroup = styled.div`
@@ -58,15 +59,15 @@ export const ProductTile = styled.div`
   border-style: solid;
   border-color: ${({ theme }) => theme.primaryHover};
   padding: 15px;
-  border-radius: 10px; 
+  border-radius: 10px;
 
   h2 {
     font-size: 26px;
-    margin: 10px 0px; 
+    margin: 10px 0px;
     text-align: center;
   }
   p {
-    padding: 0 30px; 
+    padding: 0 30px;
     text-align: left;
   }
 `;

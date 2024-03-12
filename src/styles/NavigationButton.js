@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const NavigationButton = styled.button`
   background-color: ${({ theme }) => theme.primary};
@@ -13,7 +13,7 @@ const NavigationButton = styled.button`
   border-radius: 12px;
 
   &:hover {
-    background-color: ${({ theme }) => theme.primaryHover};;
+    background-color: ${({ theme }) => theme.primaryHover};
   }
 `;
 

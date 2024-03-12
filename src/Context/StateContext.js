@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useMemo } from 'react';
+import React, { createContext, useContext, useState, useMemo } from "react";
 
 const AppContext = createContext({
   selectedCategory: null,
@@ -6,7 +6,7 @@ const AppContext = createContext({
   selectedSubCategory: null,
   setSelectedSubCategory: () => {},
   selectedColour: null,
-  setSelectedColour: () => {}
+  setSelectedColour: () => {},
 });
 
 export const useAppContext = () => useContext(AppContext);
@@ -16,14 +16,17 @@ export const AppProvider = ({ children }) => {
   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [selectedColour, setSelectedColour] = useState(null);
 
-  const value = useMemo(() => ({
-    selectedCategory,
-    setSelectedCategory,
-    selectedSubCategory,
-    setSelectedSubCategory,
-    selectedColour,
-    setSelectedColour
-  }), [selectedCategory, selectedSubCategory, selectedColour]);
+  const value = useMemo(
+    () => ({
+      selectedCategory,
+      setSelectedCategory,
+      selectedSubCategory,
+      setSelectedSubCategory,
+      selectedColour,
+      setSelectedColour,
+    }),
+    [selectedCategory, selectedSubCategory, selectedColour]
+  );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

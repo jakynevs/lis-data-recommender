@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { DropdownContainer, Select } from './DropdownStyles';
+import React, { useState } from "react";
+import { DropdownContainer, Select } from "./DropdownStyles";
 
 const Dropdown = ({ options, onChange }) => {
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState("");
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -11,11 +11,12 @@ const Dropdown = ({ options, onChange }) => {
     }
   };
 
-
   return (
     <DropdownContainer>
       <Select value={selectedValue} onChange={handleChange}>
-      <option value="" disabled>Choose an option</option>
+        <option value="" disabled>
+          Choose an option
+        </option>
         {options.map((option, index) => (
           <option key={index} value={option.value}>
             {option.label}

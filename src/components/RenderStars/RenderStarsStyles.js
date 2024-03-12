@@ -6,11 +6,11 @@ export const StarsDisplay = styled.div`
 
 export const Star = styled.span`
   // Transient props that can be passed to styled component
-  color: ${({ $active, theme }) => $active ? theme.primaryHover : theme.text};
+  color: ${({ $active, theme }) => ($active ? theme.primaryHover : theme.text)};
   cursor: ${({ $cursorStyle }) => $cursorStyle};
-  
+
   &:hover {
-    color: ${({ theme, $cursorStyle }) => $cursorStyle === 'pointer' ? theme.primaryHover : theme.text};
+    color: ${({ theme, $cursorStyle }) =>
+      $cursorStyle === "pointer" ? theme.primaryHover : theme.text};
   }
 `;
-

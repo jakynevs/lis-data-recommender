@@ -1,16 +1,16 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const ContentWrapper = styled.div`
-  max-width: 600px; 
+  max-width: 600px;
   width: 100%;
-  margin: auto; 
+  margin: auto;
   text-align: center;
-  padding-top: 20px; 
+  padding-top: 20px;
   background: ${({ theme }) => theme.body};
   border-radius: 12px;
 
   > h1 {
-      margin-top: 0px; 
+    margin-top: 0px;
   }
 `;
 

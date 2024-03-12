@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const DropdownContainer = styled.div`
   padding: 10px;
@@ -8,7 +8,7 @@ export const DropdownContainer = styled.div`
 
 export const Select = styled.select`
   height: 50px;
-  width: 500px;  
+  width: 500px;
   border-radius: 5px;
   border: 3px solid #ccc;
   background-color: ${({ theme }) => theme.primary};
@@ -18,10 +18,10 @@ export const Select = styled.select`
   border-radius: 12px;
   font-size: 20px;
   &:hover {
-    border-color: ${({ theme }) => theme.primaryHover};;
+    border-color: ${({ theme }) => theme.primaryHover};
   }
   &:focus {
     outline: none;
-    border-color: #007bff; 
+    border-color: #007bff;
   }
 `;
