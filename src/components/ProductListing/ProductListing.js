@@ -8,7 +8,8 @@ import { useAppContext } from '../../Context/StateContext';
 import { fetchProducts } from '../../services/api';
 import { ProductsGrid, ProductTile } from '../../styles/ProductGrid';
 import TitleContainer from '../../styles/TitleContainer';
-import { Filter, FilterLabel, FiltersContainer, FilterGroup, Column } from '../../styles/FilterStyles';
+import { Filter, FilterLabel, FiltersContainer, FilterGroup, Column, PriceDisplay } from '../../styles/FilterStyles';
+import StarsRating from '../RenderStars/RenderStars';
 
 function ProductListing() {
   const [products, setProducts] = useState([])
@@ -94,6 +95,11 @@ function ProductListing() {
     }
   };
 
+    // Handler to update the rating
+    const handleStarClick = (newRating) => {
+      setMinRating(newRating);
+    };
+
   let navigate = useNavigate();
   
   const goToPreviousStep = () => {
@@ -110,13 +116,15 @@ function ProductListing() {
               <FilterGroup>
                 <FilterLabel>Minimum Price:</FilterLabel>
                 <Filter>
-                  <input type="range" min="0" max="2000" value={minPrice} onChange={handleMinPriceChange} />  ${Math.round(maxPrice)}
+                  <input type="range" min="0" max="2000" value={minPrice} onChange={handleMinPriceChange} />  
+                  <PriceDisplay>${Math.round(maxPrice)}</PriceDisplay>
                 </Filter>
               </FilterGroup>
                 <FilterGroup>
                   <FilterLabel>Maximum Price:</FilterLabel>
                   <Filter>
-                  <input type="range" min="0" max="2000" value={maxPrice} onChange={handleMaxPriceChange} />  ${Math.round(minPrice)}
+                  <input type="range" min="0" max="2000" value={maxPrice} onChange={handleMaxPriceChange} />  
+                  <PriceDisplay>${Math.round(minPrice)}</PriceDisplay>
                   </Filter>
                 </FilterGroup>
           </Column>
@@ -124,7 +132,7 @@ function ProductListing() {
             <FilterGroup>
               <FilterLabel>Rating:</FilterLabel>
               <Filter>
-                <input type="range" min="1" max="5" value={minRating} onChange={e => setMinRating(Number(e.target.value))} /> 
+                <StarsRating rating={minRating} onStarClick={handleStarClick}/>
               </Filter>
             </FilterGroup>
             <FilterGroup>

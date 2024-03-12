@@ -11,6 +11,7 @@ export const FiltersContainer = styled.div`
 
 export const FilterLabel = styled.label`
 margin-left: 75px;
+margin-right: 10px;
 flex-shrink: 0; // Prevent the label from shrinking`;
 
 export const Filter = styled.div`
@@ -29,7 +30,6 @@ export const FilterGroup = styled.div`
 
 export const Column = styled.div`
   display: flex;
-
   flex-direction: column;
   justify-content: flex-start;
   flex: 1; // Allows the column to take up equal space
@@ -38,3 +38,8 @@ export const Column = styled.div`
   }
 `;
 
+export const PriceDisplay = styled.span`
+  display: inline-block;
+  width: 60px; // Set this to the width that can hold your largest number
+  text-align: right;
+`;
