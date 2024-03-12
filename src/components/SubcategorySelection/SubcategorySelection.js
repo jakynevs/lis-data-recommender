@@ -18,6 +18,7 @@ function SubCategorySelection() {
   const [error, setError] = useState("");
   const [itemSelected, setItemSelected] = useState(false);
 
+  // Request categories from backend
   useEffect(() => {
     const getSubCategories = async () => {
       const result = await fetchSubCategories(selectedCategory);
@@ -56,9 +57,9 @@ function SubCategorySelection() {
             <h1>Select a Subcategory</h1>
           </TitleContainer>
           {error && (
-            <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>
+            <div style={{ color: "red", marginBottom: "10px" }}>{error}</div> // Clear error messaging to user
           )}
-          <Dropdown
+          <Dropdown // Map through subcategory options
             options={subCategories.map((subCat) => ({
               value: subCat.id,
               label: subCat.name,
@@ -70,7 +71,7 @@ function SubCategorySelection() {
           <NavigationButton onClick={goToPreviousStep}>Back</NavigationButton>
           <NavigationButton
             onClick={goToNextStep}
-            disabled={!itemSelected || error}
+            disabled={!itemSelected || error} // Only enabled next button if an item has been selected
           >
             Next
           </NavigationButton>

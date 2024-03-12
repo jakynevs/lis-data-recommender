@@ -17,13 +17,14 @@ function CategorySelection() {
   const [itemSelected, setItemSelected] = useState(false);
   const { setSelectedCategory } = useAppContext();
 
+  // Request categories from backend
   useEffect(() => {
     const getCategories = async () => {
       const result = await fetchCategories();
       if (result.success) {
         setCategories(result.data);
       } else {
-        setError(result.error);
+        setError(result.error); // handle error
       }
     };
 
@@ -51,9 +52,9 @@ function CategorySelection() {
             <h1>Select a Category</h1>
           </TitleContainer>
           {error && (
-            <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>
+            <div style={{ color: "red", marginBottom: "10px" }}>{error}</div> // Clear error messaging to user
           )}
-          <Dropdown
+          <Dropdown // Map through category options
             options={categories.map((cat) => ({
               value: cat.id,
               label: cat.name,
@@ -63,7 +64,7 @@ function CategorySelection() {
           />
           <NavigationButton
             onClick={goToNextStep}
-            disabled={!itemSelected || error}
+            disabled={!itemSelected || error} // Only enabled next button if an item has been selected
           >
             Next
           </NavigationButton>

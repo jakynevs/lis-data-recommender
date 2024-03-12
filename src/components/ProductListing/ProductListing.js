@@ -30,9 +30,10 @@ function ProductListing() {
   const [maxPrice, setMaxPrice] = useState(2000);
   const [stockFilter, setStockFilter] = useState(false);
   const [sortOption, setSortOption] = useState("rating_desc");
-  const [error, setError] = useState(null); // State for managing fetch errors
-  const [isLoading, setIsLoading] = useState(false); // State for managing loading state
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
+  // Fetch products from backend
   useEffect(() => {
     setIsLoading(true); // Start loading
     const getProducts = async () => {
@@ -44,13 +45,14 @@ function ProductListing() {
       if (result.success) {
         setProducts(result.data);
       } else {
-        setError(result.error);
+        setError(result.error); // Handle error
       }
       setIsLoading(false); // End loading
     };
     getProducts();
   }, [selectedCategory, selectedSubCategory, selectedColour]);
 
+  // Handle filter changes
   useEffect(() => {
     let result = products;
 
@@ -87,7 +89,7 @@ function ProductListing() {
         break;
     }
 
-    setFilteredProducts(result);
+    setFilteredProducts(result); // Update global state
   }, [
     products,
     freeShipping,
@@ -137,10 +139,11 @@ function ProductListing() {
       </TitleContainer>
       <FiltersContainer>
         <Column>
+          {/* Col 1: Min and max price filters */}
           <FilterGroup>
             <FilterLabel>Minimum Price:</FilterLabel>
             <Filter>
-              <input
+              <input // Min price filter
                 type="range"
                 min="0"
                 max="2000"
@@ -153,7 +156,7 @@ function ProductListing() {
           <FilterGroup>
             <FilterLabel>Maximum Price:</FilterLabel>
             <Filter>
-              <input
+              <input // Max price filter
                 type="range"
                 min="0"
                 max="2000"
@@ -164,6 +167,7 @@ function ProductListing() {
             </Filter>
           </FilterGroup>
         </Column>
+        {/* Col 2: Rating and set sort */}
         <Column>
           <FilterGroup>
             <FilterLabel>Rating:</FilterLabel>
@@ -186,6 +190,7 @@ function ProductListing() {
             </Filter>
           </FilterGroup>
         </Column>
+        {/* Col 3: Select free shipping or if in stock filters */}
         <Column>
           <FilterGroup>
             <FilterLabel>Free Shipping</FilterLabel>
@@ -211,7 +216,7 @@ function ProductListing() {
       </FiltersContainer>
       {error && <div style={{ color: "red" }}>{error}</div>}
       {isLoading ? (
-        <div>Loading products...</div>
+        <div>Loading products...</div> // In case of slow request
       ) : (
         <ProductsGrid>
           {filteredProducts.map((product) => (

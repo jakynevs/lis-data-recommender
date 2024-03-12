@@ -18,6 +18,7 @@ function ColourSelection() {
   const [error, setError] = useState(null);
   const [itemSelected, setItemSelected] = useState(false);
 
+  // Request colours from backend
   useEffect(() => {
     const getColours = async () => {
       const result = await fetchColours(selectedSubCategory);
@@ -55,9 +56,9 @@ function ColourSelection() {
             <h1>Select a Colour</h1>
           </TitleContainer>
           {error && (
-            <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>
+            <div style={{ color: "red", marginBottom: "10px" }}>{error}</div> // Clear error messaging to user
           )}
-          <Dropdown
+          <Dropdown // Map through colour options
             options={colours.map((col) => ({ value: col.id, label: col.name }))}
             defaultValue={""}
             onChange={handleDropdownChange}
@@ -66,7 +67,7 @@ function ColourSelection() {
           <NavigationButton onClick={goToPreviousStep}>Back</NavigationButton>
           <NavigationButton
             onClick={goToNextStep}
-            disabled={!itemSelected || error}
+            disabled={!itemSelected || error} // Only enabled next button if an item has been selected
           >
             Next
           </NavigationButton>
