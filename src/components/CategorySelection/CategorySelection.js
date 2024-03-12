@@ -13,6 +13,8 @@ import TitleContainer from '../../styles/TitleContainer';
 
 function CategorySelection() {
   const [categories, setCategories] = useState([])
+  const [error, setError] = useState(null);
+  const [itemSelected, setItemSelected] = useState(false)
   const { setSelectedCategory } = useAppContext();
 
   useEffect(() => {
@@ -20,8 +22,10 @@ function CategorySelection() {
       try {
         const data = await fetchCategories();
         setCategories(data);
+        setError(null); // Clear previous error, if any
       } catch (error) {
         console.error(error);
+        setError('Failed to fetch categories. Please try again later.'); 
       }
     };
 
@@ -31,6 +35,7 @@ function CategorySelection() {
   const handleDropdownChange = (event) => {
     const categoryId = event.target.value;
     setSelectedCategory(categoryId);
+    setItemSelected(true)
 };
 
   let navigate = useNavigate();
@@ -48,12 +53,15 @@ function CategorySelection() {
               <TitleContainer>
                 <h1>Select a Category</h1>
               </TitleContainer>
+              {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
               <Dropdown
                 options={categories.map(cat => ({ value: cat.id, label: cat.name }))}
                 defaultValue={"Select"}
-                onChange={handleDropdownChange} />
-              <NavigationButton onClick={goToNextStep}>Next</NavigationButton>
-            </ContentWrapper>
+                onChange={handleDropdownChange} 
+                disabled={!categories.length || error} // Disable dropdown if there's an error or no categories
+                />
+            <NavigationButton onClick={goToNextStep} disabled={!itemSelected || error}>Next</NavigationButton>
+          </ContentWrapper>
         </PageContainer>
     </ThemeProvider>
   );

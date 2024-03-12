@@ -12,9 +12,11 @@ import ContentWrapper from '../../styles/ContentWrapper';
 import TitleContainer from '../../styles/TitleContainer';
 
 function ColourSelection() {
-  const [colours, setColours] = useState([])
   const { setSelectedColour } = useAppContext()
   const { selectedSubCategory } = useAppContext()
+  const [colours, setColours] = useState([])
+  const [error, setError] = useState(null);
+  const [itemSelected, setItemSelected] = useState(false)
 
   useEffect(() => {
     if(selectedSubCategory) {
@@ -22,8 +24,10 @@ function ColourSelection() {
         try {
           const data = await fetchColours(selectedSubCategory)
           setColours(data);
+          setError(null); // Clear previous error, if any
         } catch (error) {
           console.error(error)
+          setError('Failed to fetch colours. Please try again later.'); 
         }
       };
       getColours();
@@ -32,7 +36,8 @@ function ColourSelection() {
 
   const handleDropdownChange = (event) => {
     const colourId = event.target.value;
-    setSelectedColour(colourId)
+    setSelectedColour(colourId);
+    setItemSelected(true);
     }
 
   let navigate = useNavigate();
@@ -51,16 +56,18 @@ function ColourSelection() {
       <PageContainer>
             <ContentWrapper>
               <TitleContainer>
-          <h1>Select a Colour</h1>
-          </TitleContainer>
-
-            <Dropdown 
-              options={colours.map(col => ({ value: col.id, label: col.name }))} 
-              defaultValue={""} 
-              onChange={handleDropdownChange} />          
-              <NavigationButton onClick={goToPreviousStep}>Back</NavigationButton>
-              <NavigationButton onClick={goToNextStep}>Next</NavigationButton>    
-              </ContentWrapper>
+                <h1>Select a Colour</h1>
+              </TitleContainer>
+              {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
+              <Dropdown 
+                options={colours.map(col => ({ value: col.id, label: col.name }))} 
+                defaultValue={""} 
+                onChange={handleDropdownChange} 
+                disabled={!colours.length || error} // Disable dropdown if there's an error or no colours
+              />
+            <NavigationButton onClick={goToPreviousStep}>Back</NavigationButton>
+            <NavigationButton onClick={goToNextStep} disabled={!itemSelected || error}>Next</NavigationButton>
+          </ContentWrapper>
         </PageContainer>
       </ThemeProvider>
   );

@@ -13,9 +13,11 @@ import TitleContainer from '../../styles/TitleContainer';
 
 
 function SubCategorySelection() {
-  const [subCategories, setSubCategories] = useState([])
   const { setSelectedSubCategory } = useAppContext();
   const { selectedCategory } = useAppContext();
+  const [subCategories, setSubCategories] = useState([])
+  const [error, setError] = useState(null);
+  const [itemSelected, setItemSelected] = useState(false)
 
   useEffect(() => {
     if(selectedCategory) {
@@ -23,8 +25,10 @@ function SubCategorySelection() {
         try {
           const data = await fetchSubCategories(selectedCategory);
           setSubCategories(data);
+          setError(null); // Clear previous error, if any
         } catch (error) {
           console.error(error);
+          setError('Failed to fetch colours. Please try again later.'); 
         }
       };
       getSubCategories(); 
@@ -34,6 +38,7 @@ function SubCategorySelection() {
   const handleDropdownChange = (event) => {
     const subCategoryId = event.target.value;
     setSelectedSubCategory(subCategoryId)
+    setItemSelected(true)
     }
 
   let navigate = useNavigate();
@@ -54,12 +59,15 @@ function SubCategorySelection() {
             <TitleContainer>
               <h1>Select a Subcategory</h1>
             </TitleContainer>
+            {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
               <Dropdown
                 options={subCategories.map(subCat => ({ value: subCat.id, label: subCat.name }))}
                 defaultValue={""}
-                onChange={handleDropdownChange} />
+                onChange={handleDropdownChange} 
+                disabled={!subCategories.length || error} // Disable dropdown if there's an error or no colours
+                />
               <NavigationButton onClick={goToPreviousStep}>Back</NavigationButton>
-              <NavigationButton onClick={goToNextStep}>Next</NavigationButton>
+              <NavigationButton onClick={goToNextStep} disabled={!itemSelected || error}>Next</NavigationButton>
           </ContentWrapper>
       </PageContainer>
       </ThemeProvider>
