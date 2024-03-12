@@ -16,24 +16,22 @@ function SubCategorySelection() {
   const { setSelectedSubCategory } = useAppContext();
   const { selectedCategory } = useAppContext();
   const [subCategories, setSubCategories] = useState([])
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const [itemSelected, setItemSelected] = useState(false)
 
   useEffect(() => {
-    if(selectedCategory) {
-      const getSubCategories = async () => {
-        try {
-          const data = await fetchSubCategories(selectedCategory);
-          setSubCategories(data);
-          setError(null); // Clear previous error, if any
-        } catch (error) {
-          console.error(error);
-          setError('Failed to fetch colours. Please try again later.'); 
+    const getSubCategories = async () => {
+      const result = await fetchSubCategories(selectedCategory);
+      if (result.success) {
+        setSubCategories(result.data);
+        } else {
+          setError(result.error); 
         }
       };
-      getSubCategories(); 
-    }
-  }, [selectedCategory])
+
+      getSubCategories();
+    } 
+  , [selectedCategory])
 
   const handleDropdownChange = (event) => {
     const subCategoryId = event.target.value;

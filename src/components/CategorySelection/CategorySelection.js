@@ -13,36 +13,35 @@ import TitleContainer from '../../styles/TitleContainer';
 
 function CategorySelection() {
   const [categories, setCategories] = useState([])
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const [itemSelected, setItemSelected] = useState(false)
   const { setSelectedCategory } = useAppContext();
 
   useEffect(() => {
     const getCategories = async () => {
-      try {
-        const data = await fetchCategories();
-        setCategories(data);
-        setError(null); // Clear previous error, if any
-      } catch (error) {
-        console.error(error);
-        setError('Failed to fetch categories. Please try again later.'); 
+      const result = await fetchCategories();
+      if (result.success) {
+        setCategories(result.data);
+      } else {
+        setError(result.error);
       }
     };
 
     getCategories();
   }, []);
 
+  
   const handleDropdownChange = (event) => {
     const categoryId = event.target.value;
     setSelectedCategory(categoryId);
     setItemSelected(true)
-};
-
+  };
+  
   let navigate = useNavigate();
-
+  
   const goToNextStep = () => {
     navigate('/subcategory');
-  
+    
   };
 
   return (

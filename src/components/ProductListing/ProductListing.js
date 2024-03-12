@@ -24,23 +24,19 @@ function ProductListing() {
   const [isLoading, setIsLoading] = useState(false); // State for managing loading state
 
   useEffect(() => {
-    if (selectedCategory && selectedSubCategory && selectedColour) {
-      setIsLoading(true); // Start loading
-      const getProducts = async () => {
-        try {
-          const data = await fetchProducts(selectedCategory, selectedSubCategory, selectedColour);
-          setProducts(data);
-          setError(null); // Clear error on successful fetch
-        } catch (error) {
-          console.error(error)
-          setError('Failed to load products. Please try again.'); // Set error message on failure
-        } finally {
-          setIsLoading(false) // End loading 
-        }
-      }
-      getProducts()
+    setIsLoading(true); // Start loading
+    const getProducts = async () => {
+      const result = await fetchProducts(selectedCategory, selectedSubCategory, selectedColour);
+      if (result.success) {
+        setProducts(result.data);
+        } else {
+        setError(result.error);
+      } 
+      setIsLoading(false) // End loading 
+      
     }
-  }, [selectedCategory, selectedSubCategory, selectedColour])
+    getProducts()
+    }, [selectedCategory, selectedSubCategory, selectedColour])
   
   useEffect(() => {
     let result = products; 
@@ -111,6 +107,7 @@ function ProductListing() {
   const goToPreviousStep = () => {
     navigate('/colour');
   };
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />

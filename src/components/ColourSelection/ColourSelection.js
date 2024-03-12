@@ -19,19 +19,15 @@ function ColourSelection() {
   const [itemSelected, setItemSelected] = useState(false)
 
   useEffect(() => {
-    if(selectedSubCategory) {
-      const getColours = async () => {
-        try {
-          const data = await fetchColours(selectedSubCategory)
-          setColours(data);
-          setError(null); // Clear previous error, if any
-        } catch (error) {
-          console.error(error)
-          setError('Failed to fetch colours. Please try again later.'); 
-        }
-      };
-      getColours();
-    }
+    const getColours = async () => {
+    const result = await fetchColours(selectedSubCategory);
+    if (result.success) {
+      setColours(result.data);
+    } else {
+        setError(result.error); 
+      }
+    };
+    getColours();
   }, [selectedSubCategory])
 
   const handleDropdownChange = (event) => {
@@ -49,6 +45,7 @@ function ColourSelection() {
     const goToNextStep = () => {
       navigate('/products');
     };
+  
 
   return (
     <ThemeProvider theme={theme}>
